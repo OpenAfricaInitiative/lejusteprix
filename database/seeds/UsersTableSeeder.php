@@ -13,16 +13,33 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         User::create([
-            'name' => 'Durand',
-            'email' => 'durand@chezlui.fr',
+            'name' => 'Designer',
+            'email' => 'mortallseck@gmail.com',
             'password' => bcrypt('admin'),
             'role' => 'admin',
+            'settings'=>'{"pagination":8}',
+            
+        ]);
+        
+        User::create([
+        'name' => 'Dupont',
+        'email' => 'dupont@chezlui.fr',
+        'password' => bcrypt('user'),
+        'settings' => '{"pagination": 8}',
+    ]);
+
+        User::create([
+            'name' => 'Delmovic',
+            'email' => 'delmovic@gmail.com',
+            'password' => bcrypt('admin'),
+            'settings'=>'{"pagination":8}',
             
         ]);
         User::create([
-            'name' => 'Dupont',
-            'email' => 'dupont@chezlui.fr',
+            'name' => 'Mariam',
+            'email' => 'Mariam@gmail.com',
             'password' => bcrypt('user'),
+             'settings'=>'{"pagination":8}',
         ]);
     }
     

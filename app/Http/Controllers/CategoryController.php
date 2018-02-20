@@ -26,7 +26,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('pages.category.create');
+        // return view('pages.category.create');
     }
 
     /**
@@ -93,6 +93,6 @@ class CategoryController extends Controller
     $categorie->delete();
     flashy('Suppression effectuée avec succès');
     return response()->json();
-    return back();
+   
     }
 }

@@ -25,7 +25,7 @@
                             </em></small>
                         <small class="pull-right">
                             <em>
-                                {{ $image->created_at }}
+                                {{ $image->created_at->formatLocalized('%x') }}
                                 @adminOrOwner($image->user_id)
                                 <a class="form-delete" href="{{ route('image.destroy', $image->id) }}" data-toggle="tooltip" title="@lang('Supprimer cette photo')"><i class="fa fa-trash text-danger"></i></a>
                                 <form action="{{ route('image.destroy', $image->id) }}" method="POST" class="hide">

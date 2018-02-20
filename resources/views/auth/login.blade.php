@@ -7,8 +7,8 @@
         <form method="POST" action="{{ route('login') }}">
             {{ csrf_field() }}
             @include('layouts.partials.form', [
-                'title' => __('Adresse email'),
-                'type' => 'email',
+                'title' => __('Adresse email ou Nom utilisateur'),
+                'type' => 'text',
                 'name' => 'email',
                 'required' => true,
                 ])
