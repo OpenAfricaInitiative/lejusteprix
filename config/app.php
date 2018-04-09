@@ -161,6 +161,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
          MercurySeries\Flashy\FlashyServiceProvider::class,
+    // TCG\Voyager\VoyagerServiceProvider::class,
+
     ],
 
     /*

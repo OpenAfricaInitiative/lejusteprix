@@ -12,18 +12,21 @@
 
     <!-- Styles -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+        <link rel="stylesheet" type="text/css" href="{{ asset('library/bootstrap/css/bootstrap-theme.min.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('library/bootstrap/css/bootstrap.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('library/font-awesome-4.3.0/css/font-awesome.min.css')}}">
+          
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
    
 
 </head>
-<body>
-    <div class="container" style="padding-top: 10%">
+<body class="bg">
+    <div class="container top ">
     <main role="main" class="text-center" >
       <img src="{{asset('profile.png')}} ">
       <h1>@yield('title')</h1>
       <p class="lead">@yield('text')</p>
-      <a class="btn btn-outline-primary" href="{{route('welcome')}} ">Retour a l'acceuil</a>
+      <a class="btn btn-primary" href="{{route('home')}} ">Retour a l'acceuil</a>
     </main>
   </div>
 

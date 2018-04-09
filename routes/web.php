@@ -11,39 +11,38 @@
 |
 */
 // Acceuil et le fomulaire de creation categories
-Route::get('/','AccueilController@index')->name('welcome');
-Route::get('/create','AccueilController@create')->name('create');
+Route::get('/','AccueilController@index')->name('home');
+Route::get('/Prix','AccueilController@prix')->name('price');
 // Authentification
 Auth::routes();
+route::get('/connexion','Auth\AuthController@getLogin')->name('connexion');
+route::post('/connexion','Auth\AuthController@postLogin')->name('connexion');
+route::get('/inscription','Auth\AuthController@getRegister')->name('inscription');
+route::post('/inscription','Auth\AuthController@postRegister')->name('inscription');
+route::resource('User','UserController');
+
+Route::get('/logout', 'Auth\AuthController@getLogout')->name('logout');
+Auth::routes();
 // Image par categories
-Route::name('category')->get('categorie/{slug}', 'ImagesController@category');
-Route::name('user')->get('user/{user}', 'ImagesController@user');
+Route::name('riz')->get('/Riz', 'ProduitController@riz');
+Route::name('sucre')->get('/Sucre', 'ProduitController@sucre');
+Route::name('ciment')->get('/Ciment', 'ProduitController@ciment');
+Route::name('tomate')->get('/Tomate', 'ProduitController@tomate');
+Route::name('huile')->get('/Huile', 'ProduitController@huile');
+Route::name('gaz')->get('/Gaz', 'ProduitController@gaz');
+Route::name('loyers')->get('/Loyers', 'ProduitController@loyers');
 
-// Admin
-Route::middleware('admin')->group(function(){
-	Route::resource ('categorie', 'CategoryController', [
-        'except' => 'show'
-    ]);
+Route::Post('/contact','ContactController@store')->name('contact');
 
-     Route::name('maintenance.index')->get('maintenance', 'AdminController@index');
-    Route::name('maintenance.destroy')->delete('maintenance', 'AdminController@destroy');
- });
+// Blog
 
+Route::get('/blog','BlogController@index')->name('blog');
+Route::get('/post/{id}/{slug} ','BlogController@show')->name('slug');
+Route::Post('/addComment ','CommentsController@store')->name('comment');
+Route::name('maintenance.index')->get('maintenance', 'AdminController@index');
+Route::name('maintenance.destroy')->delete('maintenance', 'AdminController@destroy');
 
-// Traduction
-Route::name('language')->get('language/{lang}', 'AccueilController@language');
-
-
-
-// Securisation des données utilisateurs
-Route::middleware('auth')->group(function () {
-    Route::resource('image', 'ImagesController', [
-        'only' => ['create', 'store', 'destroy']
-    ]);
-     Route::resource('profile', 'UserController', [
-        'only' => ['edit', 'update'],
-        'parameters' => ['profile' => 'user']
-    ]);
-
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
 
 });

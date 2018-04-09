@@ -4,9 +4,10 @@
     padding: 10px 30px;
     font-weight: 400;
     position: fixed;
-    width: 100%;
+    width: 40%;
     z-index: 99999999999999999999999;
-    top: 0px;
+    top: 10px;
+    right: 20px;
     font-size: 20px;
     color: #fff;
     text-align: center;
@@ -95,7 +96,7 @@
         var template = $($("#flashy-template").html());
         $(".flashy").remove();
         template.find(".flashy__body").html(message).attr("href", link || "#").end()
-         .appendTo("body").hide().fadeIn(500).delay(2000).animate({
+         .appendTo("body").hide().fadeIn(500).delay(4000).animate({
             marginTop: "-100%"
         }, 900, "swing", function() {
             $(this).remove();

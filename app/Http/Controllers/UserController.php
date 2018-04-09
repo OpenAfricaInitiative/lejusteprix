@@ -1,17 +1,66 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\User;
+
+use App\Http\Requests\UserFormRequest;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-    
-  
-    public function edit(User $user)
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
-        $settings = json_decode($user->settings);
-    return view ('home', compact('user', 'settings'));
+        return view('auth.profile');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+    return view('auth.Edit');
 
     }
 
@@ -22,24 +71,38 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,User $user)
+    public function update(UserFormRequest $request, User $User)
     {
-            $this->authorize('update', $user);
+         if($request->image==''){
+            $paths=$request->avatar;
+        }else{
+                 // Save image
+            $path = Storage::disk('images')->put('', $request->file('image'));
 
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|string|email|max:255',
-        'pagination' => 'required',
-    ]);
+            $paths="users/".$path;
 
-    $user->update([
-        'name'=> $request->name,
-        'email' => $request->email,
-        'settings' => json_encode(['pagination' => $request->pagination]),
 
-    ]);
-     flashy('Profil mise à jour');
-        return back(); 
+         }
+        $User->update([
+        'name'=>$request->name,
+        'username'=>$request->username,
+        'email'=>$request->email,
+        'contact'=>$request->telephone,
+        'avatar'=>$paths,
+        'city'=>$request->city,
+        ]);
+        flashy('Profil mise a jour avec succès');
+        return redirect('/User');
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categorie;
-use App\Models\Image;
+use App\Models\Produit;
 use Illuminate\Http\Request;
 
 class AccueilController extends Controller
@@ -16,9 +16,7 @@ class AccueilController extends Controller
     public function index()
     {
        
-     $images = Image::latestWithUser()->paginate(config('app.pagination'));
-
-    return view('welcome', compact('images'));
+    return view('home');
     }
     
 
@@ -27,15 +25,10 @@ class AccueilController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function prix()
     {
-        return view('pages.category.create');
+       return view('prix');
     }
 
-       public function language(String $locale)
-{
-    $locale = in_array($locale, config('app.locale')) ? $locale : config('app.fallback_locale');
-    session(['locale' => $locale]);
-    return back();
-}
+
 }

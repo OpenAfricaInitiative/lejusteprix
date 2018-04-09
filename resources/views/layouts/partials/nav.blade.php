@@ -1,94 +1,69 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark navbar-laravel">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Album') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    
-                    <ul class="navbar-nav mr-auto">
-                           <li class="nav-item dropdown">
-                            <a class="nav-link" href="#" id="navbarDropdownFlag" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img width="32" height="32" alt="{{ session('locale') }}"  src="{!! asset('images/flags/' . session('locale') . '-flag.png') !!}" />
-                            </a>
-          {{--                   <div id="flags" class="dropdown-menu" aria-labelledby="navbarDropdownFlag">
-            @foreach(config('app.locale') as $locale)
-                @if($locale != session('locale'))
-                    <a class="dropdown-item" href="{{ route('language', $locale) }}">
-                        <img width="32" height="32" alt="{{ session('locale') }}"  src="{!! asset('images/flags/' . $locale . '-flag.png') !!}" />
-                    </a>
-                @endif
-            @endforeach
-        </div> --}}
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle
-                                @isset($categorie)
-                                    {{ currentRoute(route('category', $categorie->slug)) }}
-                                @endisset
-                                    " href="#" id="navbarDropdownCat" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                @lang('Catégories')
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownCat">
-                                  @foreach($categories as $category)
-                                    <a class="dropdown-item" href="{{ route('category', $category->slug) }}">{{ $category->name }}</a>
-                                @endforeach  
-                               
-                            </div>
-                        </li>
-                        @admin
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle{{ currentRoute( route('categorie.create') )}}" href="#" id="navbarDropdownGestCat" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                @lang('Administration')
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownGestCat">
-                                <a class="dropdown-item" href="{{ route('create') }}">
-                                    <i class="fas fa-plus-circle fa-lg"></i> @lang('Ajouter une catégorie')
-                                </a>
-                                <a class="dropdown-item" href="{{ route('categorie.index') }}">
-                                    <i class="fas fa-plus-wrench fa-lg"></i> @lang('Gerer les catégorie')
-                                </a>
-                                <a class="dropdown-item" href="{{ route('maintenance.index') }}">
-                                    <i class="fas fa-cogs fa-lg"></i> @lang('Maintenance')
-                                </a>
-                            </div>
-                        </li>
-                        @endadmin
-                        @auth
-                            <li class="nav-item{{ currentRoute(route('image.create')) }}"><a class="nav-link" href="{{ route('image.create') }}">@lang('Ajouter une image')</a></li>
-                        @endauth
-                    </ul>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                        <li class="nav-item{{ currentRoute(route('login')) }}"><a class="nav-link btn btn-outline-success" href="{{ route('login') }}">@lang('Connexion')</a></li>|
-                        <li class="nav-item{{ currentRoute(route('register')) }}"><a class="nav-link btn btn-outline-info" href="{{ route('register') }}">@lang('Inscription')</a></li>
-                            @else
-                             <li class="nav-item{{ currentRoute(route('profile.edit', auth()->id())) }}"><a class="nav-link" href="{{ route('profile.edit', auth()->id()) }}">@lang('Profil')</a></li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        Deconnexion
-                                    </a>
+<nav  class="amd-menu navbar navbar-default navbar-fixed-top theme_background_color fadeInDown">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+            <a class="navbar-brand" href="{{route('home')}}"> LE JUSTE<span class="black">-PRIX</span></a>
+        </div>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav ">
+         
+	            <li><a href="{{route('home')}}" class="page-scroll"><i class="fa fa-home"></i> Accueil</a></li>
+              <li><a href="{{route('price')}} " class="page-scroll"> <i class="fa fa-bullhorn"></i> Prix officiels</a></li>
+	            <li><a href="{{route('blog')}} " class="page-scroll" ><i class="fa fa-wechat"></i> Reagissez !</a></li>
+              <li><a href="statistique.php" class="page-scroll" ><i class="fa fa-line-chart"></i> Statistiques </a></li>
+              @if(Auth::check() && Auth::user()->id ==1)
+              <li><a href="{{route('maintenance.index')}} " class="page-scroll" ><i class="fa fa-wechat"></i> Maintenance !</a></li>
+              @endif
+            </ul>
+            <span class="navbar-right">
+                @guest
+                <a class="btn btn-info btn-style" href="{{route('connexion')}} " >Connexion</a>
+                <a class="btn btn-info btn-style" href="{{route('inscription')}}" >Inscription</a>
+              	@else
+
+                <ul>   
+                    <li class="dropdown">
+                        <a href="#" style="color:#0f0;" class="dropdown-toggle" data-toggle="dropdown"> 
+                            <img width="50" src="{{Voyager::image(auth::user()->avatar)}}" alt="photo de profil" class=" img-circle">
+                      
+                           {{ auth::user()->username}} <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu" style="background:#fff;">
+                              <li>
+                                  <a href="#"><i class="fa fa-fw fa-envelope"></i> Message</a>
+                              </li>
+                              <li>
+                                  <a href="/User" ><i class="fa fa-fw fa-edit"></i> Editer mon profil</a>
+                              </li>
+                              <li class="divider"></li>
+                              <li>
+                                    <a href="{{route('logout')}} "><i class="fa fa-fw fa-power-off"></i> Deconnexion</a>
+                              </li>
+                        </ul>
+                    </li>
+                  </ul> 
+                @endguest  
+              </span>
+
+          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+
+
+
+
+
+
+
