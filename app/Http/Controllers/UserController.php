@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use App\Http\Requests\UserFormRequest;
 use App\User;
 use Illuminate\Http\Request;
@@ -101,8 +102,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $User)
     {
-        //
+        Comment::where('name', auth::user()->username)
+        ->update([
+           'user_id'=>null
+        ]);
+        $User->delete();
+        return redirect('/');
     }
 }

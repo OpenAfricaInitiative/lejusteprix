@@ -88,7 +88,8 @@ public function postLogin(LoginFormRequest $request)
 
     }else{
         flashy()->error('Identification ou Mot de passe incorrect');
-        return redirect()->back();
+        $Identification=$request->log;
+        return redirect()->back()->withInput($request->only('log'));
     }
 }
   /**

@@ -10,7 +10,7 @@
                 let that = $(this)
                 e.preventDefault()
                 swal({
-                    title: '@lang('Voulez-vous Vraiment supprimer cette catégorie ?')',
+                    title: '@lang('Voulez-vous Vraiment supprimer votre compte ?')',
                     type: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#257525',
@@ -27,7 +27,7 @@
                         })
                         .fail(function () {
                             swal({
-                                title: '@lang('Il semble y avoir une erreur sur le serveur, veuillez réessayer plus tard...')',
+                                title: '@lang('Votre compte a bien été supprimer, Veuillez actualiser la page...')',
                                 type: 'warning'
                             })
                         }

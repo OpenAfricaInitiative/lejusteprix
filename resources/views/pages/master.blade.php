@@ -40,7 +40,7 @@
   </div>
 
 
-      <p>Prix Officiels de la semaine <strong> {{setting('site.source')}}</strong>Prix  </p>
+      <p>Prix Officiels de la semaine <strong> {{setting('site.source')}}</strong></p>
 
           </div>
           <div class="col-md-3">

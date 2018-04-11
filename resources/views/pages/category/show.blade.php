@@ -30,7 +30,7 @@
 
         <div id="comments" class="row">
             <div class="container">
-                @if($comments->count()==1)
+                @if($comments->count()==1 || $comments->count()==0)
                     <h3>{{$comments->count()}} Commentaire </h3>
                @else
                <h3>{{$comments->count()}} Commentaires</h3>
@@ -85,11 +85,15 @@
                         <div class="comment__avatar">
                             <img width="50" height="50" class="avatar" src="{{asset('images/avatar1.png')}}" alt="">
                         </div>
-                  @else
-
+                  @elseif($comment->user_id =='' && $comment->content !='')
+                       <div class="comment__avatar">
+                            <img width="50" height="50" class="avatar" src="{{asset('images/avatar1.png')}}" alt="">
+                        </div>   
+                  @else    
                       <div class="comment__avatar">
                             <img width="50" height="50" class="avatar" src="{{voyager::image($comment->user->avatar)}}" alt="">
                         </div>
+
                   @endif
                         <div class="comment__content">
 

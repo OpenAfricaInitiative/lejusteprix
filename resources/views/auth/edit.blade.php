@@ -2,10 +2,9 @@
 
 @section('container')
 
-
-
 	<div class="container top">
-		<div class="row">
+		
+        <div class="row">
 		<form method="POST" action="{{route('User.update',auth::user()->id)}}" enctype="multipart/form-data">
 			<div class="col-md-8">
 				<div class="panel panel-default">

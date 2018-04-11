@@ -19,8 +19,9 @@ class BlogController extends Controller
      */
     public function index()
     {
+        $category=Categorie::all();
         $posts=Post::paginate(2);
-    return view('pages.category.index',compact('posts'));
+    return view('pages.category.index',compact('posts','category'));
     }
 
     /**
