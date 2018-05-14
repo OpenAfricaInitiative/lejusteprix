@@ -66,6 +66,10 @@
 
     @include('layouts.partials/footer')
     @yield('js')
+<<<<<<< HEAD
+=======
+    @yield('Modal')
+>>>>>>> d9412d38df9a940c44f53010f15071eaf6780ef1
 </div>
     @yield('script')
 @include('flashy::message')

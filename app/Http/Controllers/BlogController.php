@@ -23,9 +23,14 @@ class BlogController extends Controller
     public function index()
     {
         $category=Categorie::all();
+<<<<<<< HEAD
         $posts=Post::where('status','PUBLISHED')->latest('id')->paginate(3);
        
     return view('pages.blog.index',compact('posts','category'));
+=======
+        $posts=Post::paginate(2);
+    return view('pages.category.index',compact('posts','category'));
+>>>>>>> d9412d38df9a940c44f53010f15071eaf6780ef1
     }
    /**
      * Tous les articles du blog avec une pagination de 9/pages

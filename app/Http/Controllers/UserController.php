@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+<<<<<<< HEAD
 use App\Contact;
+=======
+>>>>>>> d9412d38df9a940c44f53010f15071eaf6780ef1
 use App\Http\Requests\UserFormRequest;
 use App\Models\Post;
 use App\User;
@@ -125,6 +128,10 @@ class UserController extends Controller
            'user_id'=>null
         ]);
         $User->delete();
+<<<<<<< HEAD
         return redirect()->route('home');
+=======
+        return redirect('/');
+>>>>>>> d9412d38df9a940c44f53010f15071eaf6780ef1
     }
 }

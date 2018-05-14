@@ -162,6 +162,7 @@ return [
         App\Providers\RouteServiceProvider::class,
          MercurySeries\Flashy\FlashyServiceProvider::class,
     // TCG\Voyager\VoyagerServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
     ],
 

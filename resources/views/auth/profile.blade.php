@@ -1,12 +1,15 @@
 @extends('layouts.base',['title'=>"Profil"])
 @section('alerte')
 <link rel="stylesheet" type="text/css" href="{{asset('css/sweetalerte.css')}} ">
+<<<<<<< HEAD
 <style>
         .user-email {
             font-size: .85rem;
             margin-bottom: 1.5em;
         }
     </style>
+=======
+>>>>>>> d9412d38df9a940c44f53010f15071eaf6780ef1
 @stop
 @section('container')
 	<div class="container top ">
@@ -21,6 +24,7 @@
              </div>
                     
     @else
+<<<<<<< HEAD
 <div class="row">
 	<div style="background-size:cover; background-image: url({{ Voyager::image( Voyager::setting('admin.bg_image'), config('voyager.assets_path') . '/images/bg.jpg') }}); background-position: center center;position:absolute; top:0; left:0; width:100%; height:300px;"></div>
     <div style="height:100px; display:block; width:100%"></div>
@@ -43,6 +47,13 @@
 	                <a href="#" class="border list-group-item" title="Formulaire de contact"><i class=" fa fa-envelope-o" ></i> Formulaire de contact <span class="danger badge">{{$messages->count()}} </span></a>
 	         </div>
 			</div>
+=======
+    <div class="row">
+    
+		<div class="col-md-4">
+			<img src="{{Voyager::image(auth::user()->avatar)}}" class="img-thumbnail" width="250px">
+		</div>
+>>>>>>> d9412d38df9a940c44f53010f15071eaf6780ef1
 		<div class="col-md-8">
 			<h2>{{auth::user()->name}}</h2">
 			<h4 class="page-header"><i class="fa fa-clock-o"></i> Membre depuis {{ ucfirst (utf8_encode (auth::user()->created_at->formatLocalized('%A %d %B %Y '))) }} à {{auth::user()->created_at->format('H:i:s') }} </h4>
@@ -69,6 +80,7 @@
 				<a href="{{route('article')}} " class="btn-gr btn btn-color"><i class="fa fa-pencil"></i> Proposer un nouvel article </a>
 			</div>
 		</div>
+<<<<<<< HEAD
 		
 	<div class="infinite-scroll">
 		<div class="panel panel-success table-responsive ">
@@ -125,6 +137,21 @@
 @stop
 @section('script')
 
+=======
+		<a href="{{route('User.edit',auth::user()->id)}} "  class="btn btn-primary">Editer mon Profil</a>
+		<a type="button" href="{{route('User.destroy',auth::user()->id)}}" data-toggle="tooltip" title="@lang('Attention!!! cette action est dangereuse pour votre compte ')" class="btn btn-danger">Supprimer Mon compte</a>
+		
+		</div>
+	</div><br>
+@endguest
+</div><br>
+@stop
+@section('js')
+
+<script type="text/javascript" src="{{asset('js/sweetalerte.js')}} "></script>
+@stop
+@section('script')
+>>>>>>> d9412d38df9a940c44f53010f15071eaf6780ef1
 @include('layouts.partials.script')
 
 @stop
