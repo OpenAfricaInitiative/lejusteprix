@@ -1,4 +1,5 @@
 @section('script')
+    
     <script>
         $(function() {
             $.ajaxSetup({
@@ -6,14 +7,15 @@
 
             })
             $('[data-toggle="tooltip"]').tooltip()
-            $('a.btn-danger').click(function(e) {
+            $('#compte').click(function(e) {
                 let that = $(this)
                 e.preventDefault()
                 swal({
-                    title: '@lang('Voulez-vous Vraiment supprimer cette catégorie ?')',
+                    title: '@lang('Voulez-vous Vraiment supprimer votre compte ?')',
                     type: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#257525',
+                    confirmButtonColor: '#f00',
+                    cancelButtonColor: '#257525',
                     confirmButtonText: '@lang('Oui')',
                     cancelButtonText: '@lang('Non')'
                 }).then(function () {
@@ -27,7 +29,7 @@
                         })
                         .fail(function () {
                             swal({
-                                title: '@lang('Il semble y avoir une erreur sur le serveur, veuillez réessayer plus tard...')',
+                                title: '@lang('Votre compte a bien été supprimer, Veuillez actualiser la page...')',
                                 type: 'warning'
                             })
                         }
@@ -36,5 +38,6 @@
             })
         })
     </script>
-    </script>
+    {{-- Suppression d'un article --}}
+    
 @endsection

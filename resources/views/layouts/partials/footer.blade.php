@@ -34,8 +34,8 @@
                     </div>
                     <div class="footer-col col-md-4">
                         <h3><i class="fa fa-info-circle"></i> A Propos </h3>
-                        <p>Juste prix est une plateforme  qui traite les cas de corruption dans le milieu du commerce. Elle a vu le jour suite au décret n°2017-467 du 12 juillet 2017 portant plafonnement des prix et marges de certains produits... </p>
-                        <a style="margin-top: 20%;" href="#apropos" data-toggle="modal" class="btn  btn-style btn-outline"><i class="fa fa-plus-circle"></i> En savoir plus</a>
+                        <p>Juste prix est une plateforme  qui traite les cas de corruption dans le milieu du commerce. Elle a vu le jour suite au décret n°2017-467 du 12 juillet 2017 portant plafonnement des prix et marges de certains produits... </p><br>
+                        <a style="margin-top: 20%;" href="#apropos" data-toggle="modal" class="btn-gr btn-style btn-outline"><i class="fa fa-plus-circle"></i> En savoir plus</a>
                     </div>
                 </div>
             </div>
@@ -73,7 +73,8 @@
 </div>
 <!-- [ DEFAULT SCRIPT ] -->
 	<script src="{{asset('library/modernizr.custom.97074.js')}}"></script>
-	<script src="{{asset('library/jquery-1.11.3.min.js')}}"></script>
+    <script src="{{asset('library/jquery-1.11.3.min.js')}}"></script>
+	<script src="{{asset('js/jquery.js')}}"></script>
   	<script src="{{asset('library/bootstrap/js/bootstrap.js')}}"></script>
     <script src="{{asset('library/vegas/vegas.min.js')}}"></script>
 <!-- [ PLUGIN SCRIPT ] -->

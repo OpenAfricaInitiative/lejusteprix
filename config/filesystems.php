@@ -45,23 +45,23 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
+            'root' => public_path('public'),
         ],
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'root' => public_path('public'),
+            'url' => env('APP_URL').'/public',
             'visibility' => 'public',
         ],
         'images' => [
             'driver' => 'local',
-            'root' => public_path('/storage/users'),
+            'root' => public_path('/public/users'),
             'visibility' => 'public',
         ],
-        'thumb' => [
+        'posts' => [
             'driver' => 'local',
-            'root' => public_path('/thumb'),
+            'root' => public_path('/public/posts/April2018'),
             'visibility' => 'public',
         ],
 

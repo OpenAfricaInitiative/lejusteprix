@@ -3,12 +3,12 @@
     <head>
         <title>{{config(env('APP_NAME'),'JUSTE PRIX') }} | {{ $title }} </title>
         <meta charset="utf-8" />
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="description" content="Juste prix est une plaque forme en partenariat avec le Ministère du Commerce qui traite les cas de corruption dans le milieu du commerce. Elle permet de dénoncer les acteurs qui s'adonne a des pratiques condané par la loi... " />
         <meta name="keywords" content="JUSTE PRIX,transparence, prix, commerce, ivoirien, cote d'ivoire"/>
     
-        <link rel="stylesheet" type="text/css" href="{{asset('library/font-awesome-4.3.0/css/font-awesome.min.css')}}">
 
         <!-- [ PLUGIN STYLESHEET ]
             =========================================================================================================================-->
@@ -21,6 +21,7 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('library/bootstrap/css/bootstrap-theme.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('library/bootstrap/css/bootstrap.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('library/font-awesome-4.3.0/css/font-awesome.min.css')}}">
+            @yield('alerte')
             <!-- [ DEFAULT STYLESHEET ] 
             =========================================================================================================================-->
         <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
@@ -31,7 +32,7 @@
     <body>
         <!-- [ LOADERs ]
         ===============--> 
-            <div class="preloader">
+        <div class="preloader">
             <div class="loader">
                 <span></span>
                 <span></span>
@@ -64,8 +65,7 @@
         ==========================================-->
 
     @include('layouts.partials/footer')
-
-    @yield('Modal')
+    @yield('js')
 </div>
     @yield('script')
 @include('flashy::message')

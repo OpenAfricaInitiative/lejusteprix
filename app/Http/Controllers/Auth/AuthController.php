@@ -61,7 +61,7 @@ class AuthController extends Controller
     public function getLogout(){
         Auth::logout();
          flashy("Vous etes deconnecté");
-        return redirect('/');
+        return redirect()->route('home');
     }
 /**
  * @param  LoginRequest
@@ -83,12 +83,14 @@ public function postLogin(LoginFormRequest $request)
             flashy("Bienvenue sur LE JUSTE PRIX");
 
             // Authentication passed...
-            return redirect('/');
+            return redirect()->route('home');
 
 
     }else{
-        flashy()->error('Identification ou Mot de passe incorrect');
-        return redirect()->back();
+        $Identification=$request->log;
+        return back()
+        ->withInput($request->only('log'))
+        ->withErrors('Identification ou Mot de passe incorrect');
     }
 }
   /**
@@ -102,7 +104,6 @@ public function postRegister(RegisterFormRequest $request){
             'city' => $request->city,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-         
         ]);
   
     flashy("Felicitations votre inscription s'est effectuée avec success");

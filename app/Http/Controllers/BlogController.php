@@ -3,34 +3,116 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
-use App\Http\Requests\CategoryRequest;
+use App\Http\Requests\ArticleFormRequest;
 use App\Http\Requests\ContactFormRequest;
+use App\Http\Requests\UpdateFormRequest;
 use App\Models\Categorie;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
+     * Affiche la liste des categorie et celle des derniers articles.
+     *par pagination de 3 
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $posts=Post::paginate(2);
-    return view('pages.category.index',compact('posts'));
+        $category=Categorie::all();
+        $posts=Post::where('status','PUBLISHED')->latest('id')->paginate(3);
+       
+    return view('pages.blog.index',compact('posts','category'));
+    }
+   /**
+     * Tous les articles du blog avec une pagination de 9/pages
+     *
+     * @return \Illuminate\Http\Response  
+     */
+    public function all()
+    {
+        $posts=Post::where('status','PUBLISHED')->latest('Id')->paginate(10);
+    return view('pages.blog.all',compact('posts'));
     }
 
+
     /**
-     * Show the form for creating a new resource.
+     * Affiche Tous les articles et leurs categories 
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function category($Category_id)
     {
-        // return view('pages.category.create');
+        $category=Categorie::where('id',$Category_id)->firstOrFail();
+        $Posts =Post::where('category_id',$Category_id)
+        ->whereStatus('PUBLISHED')
+        ->get();
+         return view('pages.blog.category',compact('category','Posts'));
+    }
+
+    /**
+     *L'article et ses commentaires
+     *
+     * @param  int  $id
+     * @return  \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+       if($id !=''){
+        $category=Categorie::all();
+        $post=Post::find($id);
+         $comments=Comment::where('post_id',$id)->latest()->paginate(5);
+         $count=Comment::where('post_id',$id)->latest()->count();
+        return view('pages.blog.show',compact('post','comments','category','count'));
+        }
+        return back();
+    }
+    
+    /**
+     * Affichage de la page de creation d'un article
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function AddArticle()
+    {
+        if(Auth::check()){
+          $categories=Categorie::all();
+       return view('pages.blog.article.create',compact('categories'));
+        }else{
+            flashy()->error('Vous devez avoir un compte pour pourvoir effectuer cette action !');
+        return back();
+        }
+    }
+
+    /**
+     * Creation d'un article par utilisateur.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create(ArticleFormRequest $request)
+    {
+       if($request->image!=''){
+            $path = Storage::disk('posts')->put('', $request->file('image'));
+            $paths="posts/April2018/".$path;
+         }else{
+            $paths="";
+         }
+
+      Post::create([
+        'title'=>$request->title,
+        'body'=>$request->contenu,
+        'excerpt'=>$request->extrait,
+        'slug'=> str_slug($request->title),
+        'category_id'=>$request->categorie,
+        'image'=>$paths,
+        'status'=>'PENDING',
+        'author_id'=>Auth::user()->id,
+      ]);
+      flashy('Article crée avec succès');
+      return redirect()->route('blog');
     }
 
     /**
@@ -39,34 +121,13 @@ class BlogController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoryRequest $request)
+    public function store(UpdateFormRequest $request)
     {
-        Categorie::create([
-            'name'=>$request->name,
-            
-        ]);
-        flashy('Categorie créer avec succés');
-        return redirect()->route('welcome');
+     dd('ok');
+     // return view('pages.blog.article.edit',compact('article'));  
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return l'article et ses commentaires 
-     */
-    public function show($id)
-    {
-       
-       if($id !=''){
 
-        $post=Post::find($id);
-         $comments=Comment::where('post_id',$id)->latest()->get();
-        return view('pages.category.show',compact('post','comments'));
-        }
-        return back();
-    }
-    
 
 
     /**
@@ -75,9 +136,11 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Categorie $categorie)
+    public function edit($id)
     {
-        return view('pages.category.edit',compact('categorie'));
+        $categories=Categorie::all();
+        $article=Post::where('id',$id)->firstOrFail();
+        return view('pages.blog.article.edit',compact('article','categories'));
     }
 
     /**
@@ -87,11 +150,29 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryRequest $request, Categorie $categorie)
+    public function update(UpdateFormRequest $request, $id)
     {
-         $categorie->update($request->all());
-         flashy('La categorie a bien été modifieé');
-         return redirect()->route('welcome');
+        
+        
+        if($request->image!=''){
+            $path = Storage::disk('posts')->put('', $request->file('image'));
+            $paths="posts/April2018/".$path;
+         }else{
+            $paths=$request->photo;
+         }
+       
+       Post::whereId($id)->update([
+        'title'=>$request->title,
+        'body'=>$request->contenu,
+        'excerpt'=>$request->extrait,
+        'slug'=> str_slug($request->title),
+        'category_id'=>$request->categorie,
+        'image'=>$paths,
+        'status'=>'PENDING',
+        'author_id'=>Auth::user()->id,
+        ]);
+        flashy('Article mise a jour avec succès');
+        return redirect('/User'); 
     }
 
     /**
@@ -100,12 +181,11 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categorie $categorie)
+    public function destroy( $id)
     {
-
-    $categorie->delete();
-    flashy('Suppression effectuée avec succès');
-    return response()->json();
-   
+        
+        Post::whereId($id)->delete();
+        flashy('Article supprimé avec succès');
+       return back();   
     }
 }

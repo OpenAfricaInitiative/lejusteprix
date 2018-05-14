@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
+use App\Contact;
 use App\Http\Requests\UserFormRequest;
+use App\Models\Post;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,12 +15,20 @@ class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+
+     ** @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return view('auth.profile');
+        if(Auth::check()){
+        $articles=Post::where('author_id',Auth::user()->id)->paginate(5);
+        $count=Post::where('author_id',Auth::user()->id)->count();
+        $comments=Comment::where('user_id',Auth::user()->id);
+        $messages=Contact::whereEmail(Auth::user()->email);
+        return view('auth.profile',compact('articles','comments','messages','count'));
+        }else{
+            return redirect()->route('home');
+        }
     }
 
     /**
@@ -38,7 +49,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+     
     }
 
     /**
@@ -60,7 +71,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-    return view('auth.Edit');
+    return view('auth.edit');
 
     }
 
@@ -80,9 +91,15 @@ class UserController extends Controller
             $path = Storage::disk('images')->put('', $request->file('image'));
 
             $paths="users/".$path;
-
-
          }
+
+         if($request->password !=""){
+            $password= bcrypt($request->password);
+            $User->update([
+                'password'=> $password
+            ]);
+            }
+            
         $User->update([
         'name'=>$request->name,
         'username'=>$request->username,
@@ -101,8 +118,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $User)
     {
-        //
+        Comment::where('name', auth::user()->username)
+        ->update([
+           'user_id'=>null
+        ]);
+        $User->delete();
+        return redirect()->route('home');
     }
 }

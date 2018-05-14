@@ -2,10 +2,9 @@
 
 @section('container')
 
-
-
 	<div class="container top">
-		<div class="row">
+		
+        <div class="row">
 		<form method="POST" action="{{route('User.update',auth::user()->id)}}" enctype="multipart/form-data">
 			<div class="col-md-8">
 				<div class="panel panel-default">
@@ -55,10 +54,10 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group {{ $errors->has('portable') ? 'has-error' : '' }}">
-                                        <label class="control-label" for="portable">Portable</label>
-                                        <input type="password" name="portable" placeholder="Portable" id="password" class="form-control">
-                                        {!! $errors->first('portable', '<span class="text-danger">:message</span>') !!}
+                                    <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
+                                        <label class="control-label" for="password">Mot de passe</label>
+                                        <input type="password" name="password" placeholder="Laisser vidde pour conserver votre mot de passe" id="password" class="form-control">
+                                        {!! $errors->first('password', '<span class="text-danger">:message</span>') !!}
                                     </div>
                                 </div>
                             </div>

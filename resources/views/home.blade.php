@@ -11,10 +11,10 @@
 	              </div>
 	              <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
 	                <div class="text-center top40">
-	                    <a href="{{route('price')}} " class=" btn btns theme_background_color white fadeInLeft" ><i class="fa fa-bullhorn"></i>  PRIX officiel</a>
-	                    <a href="{{route('blog')}} " class="btn btns white-background themecolor fadeInDown" style="width: 250px"><i class="fa fa-wechat"></i> discussions</a>
-	                    <a href="statistique.php"  class="btn btns black-background white fadeInRight" style="width: 250px"><i class="fa fa-line-chart"></i> Statistiques</a>
-	                </div>
+                      <a href="{{route('price')}} " class="btn-gr  btn btns theme_background_color white fadeInLeft" ><i class="fa fa-bullhorn"></i>  PRIX officiel</a>
+	                    <a href="{{route('blog')}} " class="btn-gr btn btns white-background themecolor fadeInDown" style="width: 250px"><i class="fa fa-wechat"></i> Réagissez !</a>
+	                    <a href="{{route('stat')}}"  class="btn-gr btn btns black-background white fadeInRight" style="width: 250px"><i class="fa fa-line-chart"></i> Statistiques</a>
+                  </div>
 	              </div>
 	          </div>
 	      </div>
@@ -155,7 +155,7 @@
       </div>
         <div class="eloigner col-md-4">
           <img src="{{voyager::image(setting('site.logo'))}}" class="img-responsive" width="500PX">
-          <center><a href="#appli" data-toggle="modal" class="btn btn-style">Application mobile</a></center>
+          <center><a href="#appli" data-toggle="modal" class="btn-gr btn btn-style">Application mobile</a></center>
         </div>
       </div>
   </section>
@@ -202,7 +202,7 @@
                       <p class="help-block text-error"></p>
                     </div>
                 </div><br>
-                        <button class="btn btn-style"> Envoyer</button>
+                        <button class="btn-gr btn btn-style"> Envoyer</button>
            </form>
         </div>
    	</div>

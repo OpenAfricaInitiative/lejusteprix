@@ -4,7 +4,7 @@
     padding: 10px 30px;
     font-weight: 400;
     position: fixed;
-    width: 40%;
+    width: auto;
     z-index: 99999999999999999999999;
     top: 10px;
     right: 20px;

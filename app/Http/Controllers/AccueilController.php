@@ -27,7 +27,16 @@ class AccueilController extends Controller
      */
     public function prix()
     {
-       return view('prix');
+       return view('pages.produit.index');
+    }
+     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function stat()
+    {
+       return view('stat');
     }
 
 

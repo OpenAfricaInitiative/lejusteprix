@@ -12,18 +12,17 @@
 */
 // Acceuil et le fomulaire de creation categories
 Route::get('/','AccueilController@index')->name('home');
+Route::get('/home','AccueilController@index');
 Route::get('/Prix','AccueilController@prix')->name('price');
+Route::get('/Statistique','AccueilController@stat')->name('stat');
 // Authentification
 Auth::routes();
-route::get('/connexion','Auth\AuthController@getLogin')->name('connexion');
-route::post('/connexion','Auth\AuthController@postLogin')->name('connexion');
-route::get('/inscription','Auth\AuthController@getRegister')->name('inscription');
-route::post('/inscription','Auth\AuthController@postRegister')->name('inscription');
+
 route::resource('User','UserController');
 
 Route::get('/logout', 'Auth\AuthController@getLogout')->name('logout');
 Auth::routes();
-// Image par categories
+// Prix officiles des produits par categories
 Route::name('riz')->get('/Riz', 'ProduitController@riz');
 Route::name('sucre')->get('/Sucre', 'ProduitController@sucre');
 Route::name('ciment')->get('/Ciment', 'ProduitController@ciment');
@@ -32,13 +31,26 @@ Route::name('huile')->get('/Huile', 'ProduitController@huile');
 Route::name('gaz')->get('/Gaz', 'ProduitController@gaz');
 Route::name('loyers')->get('/Loyers', 'ProduitController@loyers');
 
+Route::name('sanction')->get('/Sanction', 'ProduitController@sanction');
+Route::name('administratif')->get('/Administratif', 'ProduitController@administratif');
+
 Route::Post('/contact','ContactController@store')->name('contact');
 
 // Blog
+Route::group(['prefix'=>'blog'],function(){
+	Route::get('/','BlogController@index')->name('blog');
+	Route::get('/post/{id}/{slug} ','BlogController@show')->name('slug');
+	Route::get('/category/{id}/{slug} ','BlogController@category')->name('category');
+	Route::get('/All','BlogController@all')->name('all');
+// Article des utilisateurs
+	Route::get('/Article','BlogController@AddArticle')->name('article');
+	Route::post('/Article','BlogController@create')->name('article');
+	Route::get('/Update/{id}/Article','BlogController@edit')->name('edit');
+	Route::put('/Update/Article/{id}','BlogController@update')->name('update');
+	Route::delete('/Delete/Article/{id}','BlogController@destroy')->name('destroy');
 
-Route::get('/blog','BlogController@index')->name('blog');
-Route::get('/post/{id}/{slug} ','BlogController@show')->name('slug');
-Route::Post('/addComment ','CommentsController@store')->name('comment');
+});
+Route::post('/addComment ','CommentsController@store')->name('comment');
 Route::name('maintenance.index')->get('maintenance', 'AdminController@index');
 Route::name('maintenance.destroy')->delete('maintenance', 'AdminController@destroy');
 
