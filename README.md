@@ -9,13 +9,13 @@ Visitez l'application [le juste prix](https://lejusteprix.info)
 
 <h1>Installation </h1>
 
- <p>Ouvrir votre terminal et tapez les commandes suivantes:</p>
+ <p>Ouvrez votre terminal et tapez les commandes suivantes:</p>
 
  <ul>
  <li><code>git clone https://github.com/OpenAfricaInitiative/lejusteprix.git nom_duçprojet</code></li>
  <li><code>cd npm_duprojet</code></li>
  <li><code>composer install</code></li>
- <li>renommer le fichier point .en.example en .env</li>
+ <li>Renommer le fichier point .en.example en .env</li>
  <li><code>php artisan key:generate</code> pour obtenir une nouvelle cle</li>
  <li>Creer une base de donnée et connecter le a application en utilisant le fichier .env
  <ul>
@@ -27,7 +27,7 @@ Visitez l'application [le juste prix](https://lejusteprix.info)
   <li> DB_PASSWORD=secret</li>
  </ul>
  </li>
- <li>Si tu ytilise sqlite
+ <li>Si tu utilise sqlite
   <ul>
   <li>DB_CONNECTION=mysql</li>
    <li><code>touch database/database.sqlite</code> pour creer ta base de donnée</li>
