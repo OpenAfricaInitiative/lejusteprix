@@ -1,4 +1,9 @@
 @component('mail::message')
+<div>
+	<img src="{{ asset('/images/dev.png') }}">
+</div>
+<hr style="border-bottom: 5px solid #257525">
+
 # Formualire de Contact
 
 Ce message vient du formulaire du site {{ config('app.name') }}

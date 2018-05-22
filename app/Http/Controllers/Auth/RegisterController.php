@@ -30,7 +30,7 @@ class RegisterController extends Controller
      */
    protected function redirectTo()
     {
-        flashy('Merci pour votre inscription! Nous vous notifiérons pour le debut des formations.');
+     
         return '/';
     }
 

@@ -25,10 +25,4 @@ class Post extends \TCG\Voyager\Models\Post
     {
         return $this->hasMany(Comment::class);
     }
-
-<<<<<<< HEAD
-    
-=======
-	
->>>>>>> d9412d38df9a940c44f53010f15071eaf6780ef1
 }

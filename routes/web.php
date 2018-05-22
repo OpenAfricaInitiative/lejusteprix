@@ -1,5 +1,7 @@
 <?php
 
+// use App\Mail\ContactMessage;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,6 +13,9 @@
 |
 */
 // Acceuil et le fomulaire de creation categories
+// Route::get('/email',function() {
+// 	return new ContactMessage('demo',"email@demo","teste de email");
+// } );
 Route::get('/','AccueilController@index')->name('home');
 Route::get('/home','AccueilController@index');
 Route::get('/Prix','AccueilController@prix')->name('price');

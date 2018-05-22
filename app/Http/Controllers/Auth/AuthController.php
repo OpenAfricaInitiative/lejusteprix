@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\LoginFormRequest;
-use App\Http\Requests\RegisterFormRequest;
 use App\User;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -48,13 +46,7 @@ class AuthController extends Controller
     }
 
     
-    public function getLogin(){
-    	return view('auth.login');
-    }
-   
-     public function getRegister(){
-        return view('auth.register');
-    }
+    
     /**
      * @return [string]
      */
@@ -63,58 +55,7 @@ class AuthController extends Controller
          flashy("Vous etes deconnecté");
         return redirect()->route('home');
     }
-/**
- * @param  LoginRequest
- * @return [string]
- */
-public function postLogin(LoginFormRequest $request)
-{
-   
-    $logValue = $request->log;
-     $logAccess = filter_var($logValue, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-   
-
-    $credentials = [
-        $logAccess  => $logValue, 
-       'password'  => $request->password
-     ];
-        $remember=$request->remember;
-            if (Auth::attempt($credentials, $remember)) {
-            flashy("Bienvenue sur LE JUSTE PRIX");
-
-            // Authentication passed...
-            return redirect()->route('home');
 
 
-    }else{
-<<<<<<< HEAD
-        $Identification=$request->log;
-        return back()
-        ->withInput($request->only('log'))
-        ->withErrors('Identification ou Mot de passe incorrect');
-=======
-        flashy()->error('Identification ou Mot de passe incorrect');
-        $Identification=$request->log;
-        return redirect()->back()->withInput($request->only('log'));
->>>>>>> d9412d38df9a940c44f53010f15071eaf6780ef1
-    }
-}
-  /**
-   * @param  RegisterRequest
-   * @return [string]
-   */
-public function postRegister(RegisterFormRequest $request){
-     User::create([
-            'name' => $request->name,
-            'username' => $request->username,
-            'city' => $request->city,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-        ]);
-  
-    flashy("Felicitations votre inscription s'est effectuée avec success");
-   return redirect()->route('connexion');
-
-}
 }
 
